@@ -40,3 +40,10 @@ VALUES
 (102, 30, 88),
 (103, 20, 92),
 (104, 30, 96);
+
+INSERT INTO alumno
+(Matricula, Nombre, FechaNacimiento)
+VALUES
+(105, 'Ana Laura', '2003-08-20'),
+(106, 'anarillo', '2004-02-15'),
+(107, 'andres', '2005-11-10');

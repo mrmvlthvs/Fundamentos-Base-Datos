@@ -1,0 +1,4 @@
+USE SMA_Control;
+SHOW DATABASES;
+
+
