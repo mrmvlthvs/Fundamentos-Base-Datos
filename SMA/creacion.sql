@@ -104,4 +104,55 @@ CREATE TABLE IF NOT EXISTS telefono_tutor (
     FOREIGN KEY (id_tutor) REFERENCES tutor(id_tutor)
 );
 
-CREATE TABLE IF NOT EXISTS criterio
+CREATE TABLE IF NOT EXISTS criterio (
+    id_criterio INT PRIMARY KEY AUTO_INCREMENT,
+    id_materia INT,
+    nombre VARCHAR(100) NOT NULL,
+    ponderacion DECIMAL(5,2) NOT NULL,
+    FOREIGN KEY (id_materia) REFERENCES materia(id_materia)
+);
+
+CREATE TABLE IF NOT EXISTS trimestre (
+    id_trimestre INT PRIMARY KEY AUTO_INCREMENT,
+    id_ciclo INT,
+    nombre VARCHAR(50) NOT NULL,
+    fecha_inicio DATE NOT NULL,
+    fecha_fin DATE NOT NULL,
+    FOREIGN KEY (id_ciclo) REFERENCES ciclo_escolar(id_ciclo)
+)
+
+CREATE TABLE IF NOT EXISTS calificacion (
+    id_calificacion INT PRIMARY KEY AUTO_INCREMENT,
+    id_inscripcion INT,
+    id_criterio INT,
+    id_trimestre INT,
+    id_docente INT,
+    id_alumno INT,
+    calificacion DECIMAL(5,2) NOT NULL,
+    fecha_registro DATE NOT NULL,
+    FOREIGN KEY (id_inscripcion) REFERENCES inscripcion(id_inscripcion),
+    FOREIGN KEY (id_criterio) REFERENCES criterio(id_criterio),
+    FOREIGN KEY (id_trimestre) REFERENCES trimestre(id_trimestre),
+    FOREIGN KEY (id_docente) REFERENCES docente(id_docente),
+    FOREIGN KEY (id_alumno) REFERENCES alumno(id_alumno)
+);
+
+CREATE TABLE IF NOT EXISTS cuenta_alumno (
+    id_cuenta INT PRIMARY KEY AUTO_INCREMENT,
+    id_alumno INT,
+    id_tutor INT,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    estado ENUM('Activo', 'Inactivo') NOT NULL,
+    FOREIGN KEY (id_alumno) REFERENCES alumno(id_alumno),
+    FOREIGN KEY (id_tutor) REFERENCES tutor(id_tutor)
+);
+
+CREATE TABLE IF NOT EXISTS cuenta_docente (
+    id_cuenta INT PRIMARY KEY AUTO_INCREMENT,
+    id_docente INT,
+    usuario VARCHAR(50) NOT NULL UNIQUE,
+    contrasena VARCHAR(255) NOT NULL,
+    estado ENUM('Activo', 'Inactivo') NOT NULL,
+    FOREIGN KEY (id_docente) REFERENCES docente(id_docente)
+);
