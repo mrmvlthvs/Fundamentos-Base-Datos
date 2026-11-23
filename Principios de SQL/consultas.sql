@@ -14,3 +14,9 @@ ORDER BY FechaNacimiento;
 SELECT * FROM alumno
 WHERE Matricula = 101;
 
+SELECT * FROM inscripcion
+WHERE calificacion >= 90;
+
+
+SELECT * FROM alumno
+WHERE Nombre LIKE 'an%';
